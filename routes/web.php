@@ -10,5 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// デフォルトのコメント部分は省略
+
 Route::get('/', 'TasksController@index');
-Route::resource('Tasks','TasksController');
+
+Route::resource('tasks','TasksController');

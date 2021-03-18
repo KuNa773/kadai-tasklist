@@ -16,7 +16,7 @@ class TasksController extends Controller
     public function index()
     {
         $tasks=Task::all();
-        return view('tasks.index',[
+        return view('Tasks.index',[
             'tasks'=>$tasks,
             ]);
 }
@@ -76,8 +76,7 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        public function edit($id)
-    {
+       
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
 
