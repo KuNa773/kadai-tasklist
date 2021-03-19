@@ -16,7 +16,7 @@ class TasksController extends Controller
     public function index()
     {
         $tasks=Task::all();
-        return view('Tasks.index',[
+        return view('tasks.index',[
             'tasks'=>$tasks,
             ]);
 }
@@ -31,7 +31,7 @@ class TasksController extends Controller
 
         // メッセージ作成ビューを表示
         return view('tasks.create', [
-            'task' => $task,
+            'tasks' => $task,
         ]);
     }
 
@@ -43,7 +43,14 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+         // バリデーション
+        $request->validate([
+            'title' => 'required|max:10',  
+            'content' => 'required|max:10',
+        ]);
+        
         $task = new Task;
+        $task->title = $request->title; 
         $task->content = $request->content;
         $task->save();
 
@@ -95,9 +102,17 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        // バリデーション
+        $request->validate([
+            'title' => 'required|max:10',
+            'content' => 'required|max:10',
+        ]);
+        
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        $task->title = $request->title; 
         $task->content = $request->content;
         $task->save();
 
